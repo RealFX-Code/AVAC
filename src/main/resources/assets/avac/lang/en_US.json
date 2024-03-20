@@ -1,0 +1,8 @@
+{
+    "avac.midnightconfig.title": "AvAC Configuration",
+    "avac.midnightconfig.enable": "Enable AvAC?",
+    "avac.midnightconfig.customClientBrand" : "C->S Client Brand",
+    "avac.midnightconfig.OverrideVanillaModdedState": "Overwrite vanilla Mod Detection",
+    "avac.midnightconfig.comment1" : "NOTE: Make sure OverrideVanillaModdedState is enabled before enabling VanillaModdedState!",
+    "avac.midnightconfig.VanillaModdedState": "Vanilla Modded State (enable above to enable this)"
+}

@@ -1,0 +1,49 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "${group}",
+		"id": "avac",
+		"version": "${version}",
+		"metadata": {
+			"name": "AvAC",
+			"description": "Mixin-Based Server/Client Mod Validator",
+			"contributors": {
+				"Leah": "Owner"
+			},
+			"contact": {
+				"homepage": "https://realfx.rocks/",
+				"issues": "https://github.com/QuiltMC/quilt-template-mod/issues",
+				"sources": "https://github.com/QuiltMC/quilt-template-mod"
+			},
+			"icon": "assets/avac/icon.png"
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"init": [
+				"rocks.realfx.avac.avac"
+			],
+			"modmenu": [
+				"rocks.realfx.avac.compat.ModMenuInit"
+			]
+		},
+		"depends": [
+			{
+				"id": "fabric-api",
+				"versions": "*"
+			},
+			{
+				"id": "midnightlib",
+				"versions": ">=1.5.3-fabric"
+			},
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.19.1"
+			},
+			{
+				"id": "minecraft",
+				"versions": ">=1.20"
+			}
+		]
+	},
+	"mixin": "avac.mixins.json"
+}
