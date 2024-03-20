@@ -71,8 +71,7 @@ dependencies {
 
 	modImplementation "com.terraformersmc:modmenu:${libs.versions.modmenu.get()}"
 
-
-	modImplementation "net.fabricmc.fabric-api:fabric-api:0.96.11%2B1.20.4"
+	modImplementation 'net.fabricmc.fabric-api:fabric-api:0.96.11+1.20.4'
 
 	// QSL is not a complete API; You will need Quilted Fabric API to fill in the gaps.
 	// Quilted Fabric API will automatically pull in the correct QSL version.
