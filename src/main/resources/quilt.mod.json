@@ -28,12 +28,17 @@
 		},
 		"depends": [
 			{
-				"id": "fabric-api",
-				"versions": "*"
-			},
-			{
 				"id": "midnightlib",
 				"versions": ">=1.5.3-fabric"
+			},
+			{
+				"id": "fabric-api",
+				"versions": ">=0.96.11",
+				"optional": true
+			},
+			{
+				"id": "modmenu",
+				"optional": true
 			},
 			{
 				"id": "quilt_loader",

@@ -13,7 +13,7 @@ public class avacConfig extends MidnightConfig {
 	@Entry(category = "client")
 	public static boolean OverrideVanillaModdedState = false;
 
-	@Entry(category = "client")
+	@Comment(category = "client")
 	public static Comment comment1;
 
 	@Entry(category = "client")

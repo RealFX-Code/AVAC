@@ -4,10 +4,12 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import net.minecraft.util.ModStatus;
 import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
+
 import org.quiltmc.config.api.annotations.Comment;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 import org.quiltmc.qsl.command.api.CommandRegistrationCallback;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import net.minecraft.client.ClientBrandRetriever;
@@ -24,7 +26,7 @@ public class avac implements ModInitializer {
 	@Override
 	public void onInitialize(@NotNull ModContainer mod) {
 
-		LOGGER.error(" Loading {}...", mod.metadata().name());
+		LOGGER.warn(" Loading {}...", mod.metadata().name());
 
 		LOGGER.info(" Initializing Configuration...");
 
