@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "rocks.realfx.avac.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "client.GetClientModNameMixin",
+    "client.TitleScreenMixin",
+    "client.IsModdedMixin"
+  ],
+  "server": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

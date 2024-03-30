@@ -1,0 +1,35 @@
+[versions]
+# Minecraft
+minecraft = "1.20.4"
+
+# Quilt Versions
+quilt_mappings = "1.20.4+build.3"
+quilt_loader = "0.24.0"
+
+# Quilt Libraries
+qsl_version = "8.0.0-alpha.10"
+quilted_fabric_api = "9.0.0-alpha.5+0.96.11-1.20.4"
+
+# Mod dependencies
+midnightlib_version = "1.5.3-fabric"
+modmenu = "9.0.0"
+
+[libraries]
+minecraft = { module = "com.mojang:minecraft", version.ref = "minecraft" }
+
+quilt_mappings = { module = "org.quiltmc:quilt-mappings", version.ref = "quilt_mappings" }
+quilt_loader = { module = "org.quiltmc:quilt-loader", version.ref = "quilt_loader" }
+
+qsl = {module = "org.quiltmc.qsl:core", version.ref = "qsl_version"}
+quilted_fabric_api = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api", version.ref = "quilted_fabric_api" }
+quilted_fabric_api_deprecated = { module = "org.quiltmc.quilted-fabric-api:quilted-fabric-api-deprecated", version.ref = "quilted_fabric_api" }
+
+midnightlib = {module="maven.modrinth:midnightlib", version.ref="midnightlib_version"}
+modmenu = { module = "com.terraformersmc:modmenu", version.ref = "modmenu"}
+
+# If you have multiple similar dependencies, you can declare a dependency bundle and reference it on the build script with "libs.bundles.example".
+[bundles]
+quilted_fabric_api = ["quilted_fabric_api", "quilted_fabric_api_deprecated"]
+
+[plugins]
+quilt_loom = { id = "org.quiltmc.loom", version = "1.4.1" }

@@ -1,0 +1,61 @@
+{
+	"schema_version": 1,
+	"quilt_loader": {
+		"group": "rocks.realfx",
+		"id": "avac",
+		"version": "${version}",
+		"metadata": {
+			"name": "AvAC",
+			"description": "A Mixin-based client-to-server Anti-Cheat.",
+			"contact": {
+				"homepage": "https://www.realfx.rocks/?from=avac",
+				"issues": "https://github.com/RealFX-Code/AVAC/issues",
+				"sources": "https://github.com/RealFX-Code/AVAC"
+			},
+			"contributors": {
+				"L3@H": "Owner"
+			},
+			"icon": "assets/avac/icon.png"
+		},
+		"intermediate_mappings": "net.fabricmc:intermediary",
+		"entrypoints": {
+			"init": [
+				"rocks.realfx.avac.AvAC"
+			],
+			"client_init": [
+				"rocks.realfx.avac.client.AvACClient"
+			],
+			"server_init": [
+				"rocks.realfx.avac.server.AvACServer"
+			],
+			"modmenu": [
+				"rocks.realfx.avac.compat.ModMenuInit"
+			]
+		},
+		"depends": [
+			{
+				"id": "midnightlib"
+			},
+			{
+				"id": "modmenu",
+				"optional": true
+			},
+			{
+				"id": "quilt_loader",
+				"versions": ">=0.24.0"
+			},
+			{
+				"id": "quilted_fabric_api",
+				"versions": ">=9.0.0-"
+			},
+			{
+				"id": "minecraft",
+				"versions": "~1.20.4"
+			}
+		]
+	},
+	"mixin": "avac.mixins.json",
+	"minecraft": {
+		"environment": "*"
+	}
+}
