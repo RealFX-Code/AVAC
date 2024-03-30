@@ -8,7 +8,6 @@ import rocks.realfx.avac.modInfo;
 public class ModMenuInit implements ModMenuApi {
 	@Override
 	public ConfigScreenFactory<?> getModConfigScreenFactory() {
-		// return parent -> MidnightConfig.getScreen(parent, "avac");
 		return parent -> MidnightConfig.getScreen(parent, modInfo.MOD_ID);
 	}
 

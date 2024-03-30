@@ -48,7 +48,8 @@ dependencies {
 	modImplementation libs.quilt.loader
 	modImplementation libs.bundles.quilted.fabric.api
 
-	// Dependencies of the AvAC
+	// Development Dependencies of the AvAC
+	// Runtime dependencies are defined in "src/main/resources/quilt.mod.json".
 	modImplementation libs.modmenu
 	modImplementation libs.midnightlib
 

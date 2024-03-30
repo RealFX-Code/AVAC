@@ -7,8 +7,8 @@
   ],
   "client": [
     "client.GetClientModNameMixin",
-    "client.TitleScreenMixin",
-    "client.IsModdedMixin"
+    "client.IsModdedMixin",
+    "client.TitleScreenMixin"
   ],
   "server": [
 

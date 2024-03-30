@@ -1,11 +1,11 @@
 package rocks.realfx.avac.server;
 
-import rocks.realfx.avac.AvAC;
 import net.minecraft.network.packet.payload.CustomPayload;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import org.quiltmc.qsl.networking.api.PacketSender;
 import org.quiltmc.qsl.networking.api.ServerPlayConnectionEvents;
+import rocks.realfx.avac.AvAC;
 
 public class onServerPlayerJoinEvent implements ServerPlayConnectionEvents.Join {
 

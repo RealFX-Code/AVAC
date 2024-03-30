@@ -32,7 +32,7 @@ public class registerCommands {
 						ModStatus.Confidence.DEFINITELY
 					};
 					StringBuilder out = new StringBuilder();
-					// add config value
+
 					out.append("Is client modded? : ").append(avacConfig.testval2).append(" : ").append("FROM_LOCAL_CONFIG").append("\n");
 					for (ModStatus.Confidence confidence : IsModdedConfidences) {
 						ModStatus modStatus = new ModStatus(confidence, "");

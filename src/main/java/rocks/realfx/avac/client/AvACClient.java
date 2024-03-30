@@ -1,9 +1,9 @@
 package rocks.realfx.avac.client;
 
-import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
-import rocks.realfx.avac.AvAC;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
+import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
+import rocks.realfx.avac.AvAC;
 
 public class AvACClient implements ClientModInitializer {
 
