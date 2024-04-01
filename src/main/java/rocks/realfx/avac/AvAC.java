@@ -13,6 +13,10 @@ import static rocks.realfx.avac.modInfo.MOD_ID;
 public class AvAC implements ModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+	//
+	// This class is for both Client- and Server-Sided initialization.
+	//
+
 	@Override
 	public void onInitialize(@NotNull ModContainer mod) {
 

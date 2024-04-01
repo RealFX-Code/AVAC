@@ -14,32 +14,10 @@ public class registerCommands {
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
 			dispatcher.register(literal("getClientBrand")
 				.executes(context -> {
-					String out = "Client Brand : From Mixin   : " + ClientBrandRetriever.getClientModName() + "\n" +
-						"Client Brand : From Config : " + avacConfig.teststring1 + "\n";
+					String out = "Client Brand : From Vanilla  : " + ClientBrandRetriever.getClientModName() + "\n" +
+						"Client Brand : From Config : " + avacConfig.clientBrandWhenSuccess + "\n";
 
 					context.getSource().sendFeedback(() -> Text.literal(out), false);
-
-					return 1;
-				}));
-		});
-
-		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-			dispatcher.register(literal("isClientModded")
-				.executes(context -> {
-					ModStatus.Confidence[] IsModdedConfidences = {
-						ModStatus.Confidence.PROBABLY_NOT,
-						ModStatus.Confidence.VERY_LIKELY,
-						ModStatus.Confidence.DEFINITELY
-					};
-					StringBuilder out = new StringBuilder();
-
-					out.append("Is client modded? : ").append(avacConfig.testval2).append(" : ").append("FROM_LOCAL_CONFIG").append("\n");
-					for (ModStatus.Confidence confidence : IsModdedConfidences) {
-						ModStatus modStatus = new ModStatus(confidence, "");
-						out.append("Is client modded? : ").append(modStatus.isModded()).append(" : ").append(confidence).append("\n");
-					}
-
-					context.getSource().sendFeedback(() -> Text.literal(out.toString()), false);
 
 					return 1;
 				}));

@@ -1,3 +1,6 @@
 {
   "avac.midnightconfig.title": "AvAC Configuration",
-  "avac.midnightconfig.enable": "Enable AvAC?"
+  "avac.midnightconfig.enableAvAC": "Enable AvAC?",
+  "avac.midnightconfig.advancedComment": "CAUTION: ADVANCED SETTINGS!",
+  "avac.midnightconfig.clientBrandWhenSuccess": "Client brand on successful client validation:"
+}

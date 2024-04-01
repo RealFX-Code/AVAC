@@ -5,12 +5,12 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import org.quiltmc.qsl.networking.api.PacketSender;
 import org.quiltmc.qsl.networking.api.ServerPlayConnectionEvents;
-import rocks.realfx.avac.AvAC;
+import static rocks.realfx.avac.AvAC.LOGGER;
 
 public class onServerPlayerJoinEvent implements ServerPlayConnectionEvents.Join {
 
 	@Override
 	public void onPlayReady(ServerPlayNetworkHandler handler, PacketSender<CustomPayload> sender, MinecraftServer server) {
-		AvAC.LOGGER.warn(handler.getPlayer().getProfileName() + " joined!");
+
 	}
 }
