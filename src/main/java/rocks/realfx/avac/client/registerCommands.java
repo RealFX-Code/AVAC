@@ -2,7 +2,6 @@ package rocks.realfx.avac.client;
 
 import net.minecraft.client.ClientBrandRetriever;
 import net.minecraft.text.Text;
-import net.minecraft.util.ModStatus;
 import org.quiltmc.qsl.command.api.CommandRegistrationCallback;
 import rocks.realfx.avac.avacConfig;
 

@@ -1,7 +1,6 @@
 package rocks.realfx.avac.client;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.network.packet.payload.CustomPayload;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.loader.api.QuiltLoader;
 import rocks.realfx.avac.AvAC;

@@ -1,17 +1,20 @@
 package rocks.realfx.avac.client;
 
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.control.Alert;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.payload.CustomPayload;
 import org.quiltmc.qsl.networking.api.PacketSender;
 import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
 import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
+import rocks.realfx.avac.AvAC;
 import rocks.realfx.avac.avacState;
 import rocks.realfx.avac.common.avacPayload;
 import rocks.realfx.avac.common.validatePayload;
 
-import javax.swing.JOptionPane;
-import java.awt.*;
+import javax.swing.*;
 
 public class onClientPlayerJoinEvent implements ClientPlayConnectionEvents.Join {
 
@@ -31,13 +34,23 @@ public class onClientPlayerJoinEvent implements ClientPlayConnectionEvents.Join 
 		ClientPlayNetworking.getSender().sendPacket(ClientPlayNetworking.createC2SPacket(clientInfo));
 
 		if (!clientValidated) {
-			JOptionPane.showMessageDialog(
-				null,
-				"Ask @tromsobadet on discord for more information.\nError code: 2",
-				"FATAL ERROR",
-				JOptionPane.ERROR_MESSAGE
-			);
-			MinecraftClient.getInstance().stop();
+            try {
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (Exception e) {
+				AvAC.LOGGER.error(String.valueOf(e));
+            }
+
+			new JFXPanel();
+
+			Platform.runLater(() -> {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("FATAL ERROR");
+				alert.setHeaderText("AN INTENTIONAL ERROR HAS OCCURRED.");
+                alert.setContentText("Error code: 2");
+                alert.showAndWait();
+				client.scheduleStop();
+                Platform.exit();
+            });
 		}
 
 	}

@@ -36,7 +36,7 @@ public class AvACServer implements DedicatedServerModInitializer {
 			server
 		)){ // SUCCESS
 			AvAC.LOGGER.info("Let {} into the server!", player.getProfileName());
-		} else {
+		} else { // no success
 			if(!player.isDisconnected()){
 				throw new Error("Client validation failed, but player wasn't disconnected!");
 			}

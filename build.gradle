@@ -12,6 +12,10 @@ group = project.maven_group
 
 repositories {
 	maven {
+		name 'Quilt'
+		url 'https://maven.quiltmc.org/repository/release'
+	}
+	maven {
 		url = "https://api.modrinth.com/maven"
 	}
 	maven {
@@ -47,6 +51,7 @@ dependencies {
 	mappings variantOf(libs.quilt.mappings) { classifier 'intermediary-v2' }
 	modImplementation libs.quilt.loader
 	modImplementation libs.bundles.quilted.fabric.api
+	modImplementation libs.qsl
 
 	// Development Dependencies of the AvAC
 	// Runtime dependencies are defined in "src/main/resources/quilt.mod.json".

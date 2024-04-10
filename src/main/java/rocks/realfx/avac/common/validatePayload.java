@@ -7,6 +7,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import org.quiltmc.qsl.networking.api.PacketSender;
 import rocks.realfx.avac.AvAC;
+import rocks.realfx.avac.avacConfig;
 
 import java.util.List;
 
@@ -41,21 +42,39 @@ public class validatePayload {
         MinecraftServer server
 	) {
 
-        List<String> resourcepacks = payload.rpacks();
+		List<String> resourcepacks = payload.rpacks();
 
-		for (String pack : resourcepacks){
+		for (String pack : resourcepacks) {
 			// simple xray check
-			if(pack.toLowerCase().contains("xray")){
-                if (env == SERVER) { // if handling server-side validation
+			if (pack.toLowerCase().contains("xray")) {
+				if (env == SERVER) { // if handling server-side validation
+					AvAC.LOGGER.warn("{} : Offending rpack : {}", player.getProfileName(), pack);
 					AvAC.LOGGER.error("{} FAILED VALIDATION SERVER-SIDED!", player.getProfileName());
-                    player.networkHandler.disconnect(Text.of("You have to uninstall the resource pack: \"" + pack + "\" to play!"));
-                }
-                return false;
-            }
+					// "You have to uninstall the resource pack: \"" + pack + "\" to play!"
+					player.networkHandler.disconnect(Text.of("DM @tromsobadet on discord. Error code: 2"));
+				}
+				return false;
+			}
+		}
+
+		for (String mod : payload.mods()) {
+			if (!contains(avacConfig.allowedMods, mod)) {
+				AvAC.LOGGER.warn("UNKNOWN MOD : " + mod);
+			}
 		}
 
 		return true;
 
 	}
+
+	private static boolean contains(List<String> list, String pattern){
+		for (String str : list) {
+			if(str.equals(pattern)){
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 }
