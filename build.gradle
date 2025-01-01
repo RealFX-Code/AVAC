@@ -25,6 +25,10 @@ repositories {
 			includeGroup "com.terraformersmc"
 		}
 	}
+	maven { 
+        url "https://maven.nucleoid.xyz/"
+        name "Nucleoid"
+    }
 }
 
 loom {
@@ -51,7 +55,7 @@ dependencies {
 	mappings variantOf(libs.quilt.mappings) { classifier 'intermediary-v2' }
 	modImplementation libs.quilt.loader
 	modImplementation libs.bundles.quilted.fabric.api
-	modImplementation libs.qsl
+	modImplementation libs.quilt.standard.libraries
 
 	// Development Dependencies of the AvAC
 	// Runtime dependencies are defined in "src/main/resources/quilt.mod.json".
