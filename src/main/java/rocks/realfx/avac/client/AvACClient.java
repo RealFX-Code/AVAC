@@ -1,10 +1,15 @@
 package rocks.realfx.avac.client;
 
+import net.minecraft.network.PacketByteBuf;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
+import org.quiltmc.qsl.networking.api.PacketByteBufs;
 import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
+import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
 import rocks.realfx.avac.AvAC;
 import rocks.realfx.avac.avacConfig;
+
+import static rocks.realfx.avac.common.NetworkingConstants.HANDSHAKE_PACKET;
 
 public class AvACClient implements ClientModInitializer {
 
@@ -16,8 +21,7 @@ public class AvACClient implements ClientModInitializer {
 		registerCommands.RegisterCommands();
 
 		if(!avacConfig.enableAvAC){
-			AvAC.LOGGER.warn("AvAC is disabled.");
-			return;
+			AvAC.LOGGER.warn("AvAC is disabled, You won't be able to join AvAC-enabled servers.");
 		}
 
 		ClientPlayConnectionEvents.JOIN.register(onPlayerJoinEvent);

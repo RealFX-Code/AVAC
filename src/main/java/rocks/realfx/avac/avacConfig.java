@@ -29,6 +29,7 @@ public class avacConfig extends MidnightConfig {
             "quilt_loader",
             "minecraft",
             "mixinextras",
+			"placeholder-api",
             "java"
     );
 

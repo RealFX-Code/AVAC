@@ -11,19 +11,19 @@ import rocks.realfx.avac.avacConfig;
 
 import java.util.List;
 
-import static rocks.realfx.avac.common.validatePayload.env.*;
+import static rocks.realfx.avac.common.payloadValidator.env.*;
 
-public class validatePayload {
+public class payloadValidator {
 	public enum env {
 		CLIENT,
 		SERVER
 	}
 
-	public static boolean validatePayload(
+	public static boolean validate(
 		avacPayload payload,
 		env env
 	){
-		return validatePayload(
+		return validate(
 			payload,
 			env,
 			null,
@@ -33,7 +33,7 @@ public class validatePayload {
 		);
 	}
 
-	public static boolean validatePayload(
+	public static boolean validate(
 		avacPayload payload,
 		env env,
         ServerPlayerEntity player,
@@ -48,7 +48,7 @@ public class validatePayload {
 			// simple xray check
 			if (pack.toLowerCase().contains("xray")) {
 				if (env == SERVER) { // if handling server-side validation
-					AvAC.LOGGER.warn("{} : Offending rpack : {}", player.getProfileName(), pack);
+					AvAC.LOGGER.warn("{} : Offending resource pack : {}", player.getProfileName(), pack);
 					AvAC.LOGGER.error("{} FAILED VALIDATION SERVER-SIDED!", player.getProfileName());
 					// "You have to uninstall the resource pack: \"" + pack + "\" to play!"
 					player.networkHandler.disconnect(Text.of("DM @tromsobadet on discord. Error code: 2"));
@@ -59,7 +59,7 @@ public class validatePayload {
 
 		for (String mod : payload.mods()) {
 			if (!contains(avacConfig.allowedMods, mod)) {
-				AvAC.LOGGER.warn("UNKNOWN MOD : " + mod);
+				AvAC.LOGGER.warn("UNKNOWN MOD : {}", mod);
 			}
 		}
 
