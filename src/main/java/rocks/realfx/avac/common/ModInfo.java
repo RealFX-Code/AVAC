@@ -1,8 +1,8 @@
-package rocks.realfx.avac;
+package rocks.realfx.avac.common;
 
 import org.quiltmc.config.api.annotations.Comment;
 
-public class modInfo {
+public class ModInfo {
   static {
     MOD_ID = "avac";
     GROUP_ID = "rocks.realfx";

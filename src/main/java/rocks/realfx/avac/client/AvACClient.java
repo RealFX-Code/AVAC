@@ -4,7 +4,7 @@ import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.qsl.base.api.entrypoint.client.ClientModInitializer;
 import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
 import rocks.realfx.avac.AvAC;
-import rocks.realfx.avac.avacConfig;
+import rocks.realfx.avac.common.AvACConfig;
 
 public class AvACClient implements ClientModInitializer {
 
@@ -13,9 +13,9 @@ public class AvACClient implements ClientModInitializer {
   @Override
   public void onInitializeClient(ModContainer mod) {
     AvAC.LOGGER.info("Performing Client-Side initialization...");
-    registerCommands.RegisterCommands();
+    CommandRegistration.register();
 
-    if (!avacConfig.enableAvAC) {
+    if (!AvACConfig.enableAvAC) {
       AvAC.LOGGER.warn("AvAC is disabled, You won't be able to join AvAC-enabled servers.");
     }
 

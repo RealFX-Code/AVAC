@@ -4,7 +4,7 @@ import net.minecraft.client.MinecraftClient;
 import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.loader.api.QuiltLoader;
 import rocks.realfx.avac.AvAC;
-import rocks.realfx.avac.common.avacPayload;
+import rocks.realfx.avac.common.AvACPayload;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class gatherClientInformation {
+public class GatherClientInformation {
 
   // 30-03-2024
   // Stolen from: https://www.baeldung.com/java-list-directory-files#dir-stream
@@ -32,7 +32,7 @@ public class gatherClientInformation {
     return fileSet;
   }
 
-  public avacPayload getClientInfo() {
+  public AvACPayload get() {
     List<String> modIDs = new ArrayList<>();
 
     for (ModContainer modContainer : QuiltLoader.getAllMods()) {
@@ -61,6 +61,6 @@ public class gatherClientInformation {
       rpacks.add(String.valueOf(e));
     }
 
-    return new avacPayload(modIDs, rpacks);
+    return new AvACPayload(modIDs, rpacks);
   }
 }

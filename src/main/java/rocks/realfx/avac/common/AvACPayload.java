@@ -5,10 +5,10 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-public record avacPayload(List<String> mods, List<String> rpacks)
+public record AvACPayload(List<String> mods, List<String> rpacks)
     implements net.minecraft.network.packet.payload.CustomPayload {
 
-  public avacPayload(PacketByteBuf buf) {
+  public AvACPayload(PacketByteBuf buf) {
     this(buf.readList(PacketByteBuf::readString), buf.readList(PacketByteBuf::readString));
   }
 

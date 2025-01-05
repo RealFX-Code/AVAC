@@ -1,11 +1,11 @@
-package rocks.realfx.avac;
+package rocks.realfx.avac.common;
 
 import java.util.List;
 import com.google.common.collect.Lists;
 
 import eu.midnightdust.lib.config.MidnightConfig;
 
-public class avacConfig extends MidnightConfig {
+public class AvACConfig extends MidnightConfig {
 
   /* CLIENT CONFIG */
 

@@ -9,10 +9,9 @@ import org.quiltmc.qsl.networking.api.PacketSender;
 import org.quiltmc.qsl.networking.api.client.ClientPlayConnectionEvents;
 import org.quiltmc.qsl.networking.api.client.ClientPlayNetworking;
 import rocks.realfx.avac.AvAC;
-import rocks.realfx.avac.avacConfig;
-import rocks.realfx.avac.avacState;
-import rocks.realfx.avac.common.avacPayload;
-import rocks.realfx.avac.common.payloadValidator;
+import rocks.realfx.avac.common.AvACConfig;
+import rocks.realfx.avac.common.AvACPayload;
+import rocks.realfx.avac.common.PayloadValidator;
 
 import javax.swing.JOptionPane;
 
@@ -27,7 +26,7 @@ public class onClientPlayerJoinEvent implements ClientPlayConnectionEvents.Join 
       MinecraftClient client) {
 
     // Respect user's choice.
-    if (!avacConfig.enableAvAC) {
+    if (!AvACConfig.enableAvAC) {
       AvAC.LOGGER.warn("Skipped running AvAC as it's disabled.");
       return;
     }
@@ -43,7 +42,7 @@ public class onClientPlayerJoinEvent implements ClientPlayConnectionEvents.Join 
             minecraftClient.execute(
                 () -> {
                   PacketByteBuf responseBuf = PacketByteBufs.create();
-                  responseBuf.writeBoolean(avacConfig.enableAvAC);
+                  responseBuf.writeBoolean(AvACConfig.enableAvAC);
                   ClientPlayNetworking.send(HANDSHAKE_PACKET, responseBuf);
                 });
           }
@@ -51,12 +50,12 @@ public class onClientPlayerJoinEvent implements ClientPlayConnectionEvents.Join 
 
     // Register AVAC payload
 
-    gatherClientInformation gatherClientInformation = new gatherClientInformation();
-    avacPayload clientInfo = gatherClientInformation.getClientInfo();
+    GatherClientInformation gatherClientInformation = new GatherClientInformation();
+    AvACPayload clientInfo = gatherClientInformation.get();
 
-    boolean clientValidated = payloadValidator.validate(clientInfo, payloadValidator.env.CLIENT);
+    boolean clientValidated = PayloadValidator.validate(clientInfo, PayloadValidator.env.CLIENT);
 
-    if (clientValidated) avacState.clientSuccessfulValidation = true;
+    if (clientValidated) AvACState.clientSuccessfulValidation = true;
 
     ClientPlayNetworking.getSender().sendPacket(ClientPlayNetworking.createC2SPacket(clientInfo));
 

@@ -7,24 +7,23 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import org.quiltmc.qsl.networking.api.PacketSender;
 import rocks.realfx.avac.AvAC;
-import rocks.realfx.avac.avacConfig;
 
 import java.util.List;
 
-import static rocks.realfx.avac.common.payloadValidator.env.*;
+import static rocks.realfx.avac.common.PayloadValidator.env.*;
 
-public class payloadValidator {
+public class PayloadValidator {
   public enum env {
     CLIENT,
     SERVER
   }
 
-  public static boolean validate(avacPayload payload, env env) {
+  public static boolean validate(AvACPayload payload, env env) {
     return validate(payload, env, null, null, null, null);
   }
 
   public static boolean validate(
-      avacPayload payload,
+      AvACPayload payload,
       env env,
       ServerPlayerEntity player,
       ServerPlayNetworkHandler handler,
@@ -47,7 +46,7 @@ public class payloadValidator {
     }
 
     for (String mod : payload.mods()) {
-      if (!contains(avacConfig.allowedMods, mod)) {
+      if (!contains(AvACConfig.allowedMods, mod)) {
         AvAC.LOGGER.warn("UNKNOWN MOD : {}", mod);
       }
     }

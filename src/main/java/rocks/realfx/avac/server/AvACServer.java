@@ -16,8 +16,10 @@ import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 import io.netty.buffer.Unpooled;
 import rocks.realfx.avac.AvAC;
-import rocks.realfx.avac.common.avacPayload;
+import rocks.realfx.avac.common.AvACPayload;
 import rocks.realfx.avac.common.NetworkingConstants;
+import rocks.realfx.avac.common.PayloadValidator;
+
 import static rocks.realfx.avac.common.NetworkingConstants.HANDSHAKE_PACKET;
 
 import java.util.Map;
@@ -33,26 +35,31 @@ public class AvACServer implements DedicatedServerModInitializer {
   private static final Map<UUID, Boolean> HANDSHAKE_STATUS = new ConcurrentHashMap<>();
   private static final ScheduledExecutorService SCHEDULER = Executors.newScheduledThreadPool(1);
 
-  void handleAvACPayload(
+  private void handleAvACPayload(
       MinecraftServer server,
       ServerPlayerEntity player,
       ServerPlayNetworkHandler handler,
-      avacPayload payload,
+      AvACPayload payload,
       PacketSender<CustomPayload> responseSender) {
     AvAC.LOGGER.info(player.getProfileName() + " : " + payload.toString());
 
-    if (rocks.realfx.avac.common.payloadValidator.validate(
-        payload,
-        rocks.realfx.avac.common.payloadValidator.env.SERVER,
-        player,
-        handler,
-        responseSender,
-        server)) { // SUCCESS
+    if (PayloadValidator.validate(
+        payload, PayloadValidator.env.SERVER, player, handler, responseSender, server)) { // SUCCESS
       AvAC.LOGGER.info("Let {} into the server!", player.getProfileName());
     } else { // no success
       if (!player.isDisconnected()) {
         throw new Error("Client validation failed, but player wasn't disconnected!");
       }
+    }
+  }
+
+  private void handleHandshakeResult(ServerPlayerEntity player, boolean hasAvAC) {
+    if (hasAvAC) {
+      AvAC.LOGGER.info("Player {} seems to have AvAC installed!", player.getProfileName());
+    } else {
+      player.networkHandler.disconnect(
+          Text.literal("AVAC must be enabled and installed in order to join this server."));
+      AvAC.LOGGER.warn("Player {} doesn't have AvAC!", player.getProfileName());
     }
   }
 
@@ -62,7 +69,7 @@ public class AvACServer implements DedicatedServerModInitializer {
 
     // Register payload validation
     ServerPlayConnectionEvents.JOIN.register(onPlayerJoinEvent);
-    CustomPayloads.registerC2SPayload(NetworkingConstants.HIGHLIGHT_PACKET_ID, avacPayload::new);
+    CustomPayloads.registerC2SPayload(NetworkingConstants.HIGHLIGHT_PACKET_ID, AvACPayload::new);
     ServerPlayNetworking.registerGlobalReceiver(
         NetworkingConstants.HIGHLIGHT_PACKET_ID, this::handleAvACPayload);
 
@@ -105,31 +112,11 @@ public class AvACServer implements DedicatedServerModInitializer {
               () ->
                   server.execute(
                       () -> {
-                        // if (HANDSHAKE_STATUS.getOrDefault(player.getUuid(), false)) {
-                        //	player.networkHandler.disconnect(Text.literal("AVAC must be enabled and
-                        // installed in order to join this server."));
-                        //	AvAC.LOGGER.warn("Player {} doesn't have AvAC!",
-                        // player.getProfileName());
-                        // } else {
-                        //	AvAC.LOGGER.info("Player {} seems to have AvAC installed!",
-                        // player.getProfileName());
-                        // }
                         if (HANDSHAKE_STATUS.containsKey(player.getUuid())) {
-                          if (HANDSHAKE_STATUS.get(player.getUuid())) {
-                            AvAC.LOGGER.info(
-                                "Player {} seems to have AvAC installed!", player.getProfileName());
-                          } else {
-                            player.networkHandler.disconnect(
-                                Text.literal(
-                                    "AVAC must be enabled and installed in order to join this server."));
-                            AvAC.LOGGER.warn(
-                                "Player {} doesn't have AvAC!", player.getProfileName());
-                          }
+                          boolean hasAvAC = HANDSHAKE_STATUS.get(player.getUuid());
+                          handleHandshakeResult(player, hasAvAC);
                         } else {
-                          player.networkHandler.disconnect(
-                              Text.literal(
-                                  "AVAC must be enabled and installed in order to join this server."));
-                          AvAC.LOGGER.warn("Player {} doesn't have AvAC!", player.getProfileName());
+                          handleHandshakeResult(player, false);
                         }
                       }),
               5,
