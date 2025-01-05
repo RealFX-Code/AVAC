@@ -4,13 +4,11 @@
   "package": "rocks.realfx.avac.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    
   ],
   "client": [
     "client.GetClientModNameMixin"
   ],
   "server": [
-
   ],
   "injectors": {
     "defaultRequire": 1

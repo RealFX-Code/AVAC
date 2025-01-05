@@ -14,67 +14,53 @@ import java.util.List;
 import static rocks.realfx.avac.common.payloadValidator.env.*;
 
 public class payloadValidator {
-	public enum env {
-		CLIENT,
-		SERVER
-	}
+  public enum env {
+    CLIENT,
+    SERVER
+  }
 
-	public static boolean validate(
-		avacPayload payload,
-		env env
-	){
-		return validate(
-			payload,
-			env,
-			null,
-			null,
-			null,
-			null
-		);
-	}
+  public static boolean validate(avacPayload payload, env env) {
+    return validate(payload, env, null, null, null, null);
+  }
 
-	public static boolean validate(
-		avacPayload payload,
-		env env,
-        ServerPlayerEntity player,
-		ServerPlayNetworkHandler handler,
-		PacketSender<CustomPayload> responseSender,
-        MinecraftServer server
-	) {
+  public static boolean validate(
+      avacPayload payload,
+      env env,
+      ServerPlayerEntity player,
+      ServerPlayNetworkHandler handler,
+      PacketSender<CustomPayload> responseSender,
+      MinecraftServer server) {
 
-		List<String> resourcepacks = payload.rpacks();
+    List<String> resourcepacks = payload.rpacks();
 
-		for (String pack : resourcepacks) {
-			// simple xray check
-			if (pack.toLowerCase().contains("xray")) {
-				if (env == SERVER) { // if handling server-side validation
-					AvAC.LOGGER.warn("{} : Offending resource pack : {}", player.getProfileName(), pack);
-					AvAC.LOGGER.error("{} FAILED VALIDATION SERVER-SIDED!", player.getProfileName());
-					// "You have to uninstall the resource pack: \"" + pack + "\" to play!"
-					player.networkHandler.disconnect(Text.of("DM @tromsobadet on discord. Error code: 2"));
-				}
-				return false;
-			}
-		}
+    for (String pack : resourcepacks) {
+      // simple xray check
+      if (pack.toLowerCase().contains("xray")) {
+        if (env == SERVER) { // if handling server-side validation
+          AvAC.LOGGER.warn("{} : Offending resource pack : {}", player.getProfileName(), pack);
+          AvAC.LOGGER.error("{} FAILED VALIDATION SERVER-SIDED!", player.getProfileName());
+          // "You have to uninstall the resource pack: \"" + pack + "\" to play!"
+          player.networkHandler.disconnect(Text.of("DM @tromsobadet on discord. Error code: 2"));
+        }
+        return false;
+      }
+    }
 
-		for (String mod : payload.mods()) {
-			if (!contains(avacConfig.allowedMods, mod)) {
-				AvAC.LOGGER.warn("UNKNOWN MOD : {}", mod);
-			}
-		}
+    for (String mod : payload.mods()) {
+      if (!contains(avacConfig.allowedMods, mod)) {
+        AvAC.LOGGER.warn("UNKNOWN MOD : {}", mod);
+      }
+    }
 
-		return true;
+    return true;
+  }
 
-	}
-
-	private static boolean contains(List<String> list, String pattern){
-		for (String str : list) {
-			if(str.equals(pattern)){
-				return true;
-			}
-		}
-		return false;
-	}
-
-
+  private static boolean contains(List<String> list, String pattern) {
+    for (String str : list) {
+      if (str.equals(pattern)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

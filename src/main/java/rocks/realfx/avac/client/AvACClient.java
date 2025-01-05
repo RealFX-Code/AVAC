@@ -8,18 +8,17 @@ import rocks.realfx.avac.avacConfig;
 
 public class AvACClient implements ClientModInitializer {
 
-	private final ClientPlayConnectionEvents.Join onPlayerJoinEvent = new onClientPlayerJoinEvent();
+  private final ClientPlayConnectionEvents.Join onPlayerJoinEvent = new onClientPlayerJoinEvent();
 
-	@Override
-	public void onInitializeClient(ModContainer mod) {
-		AvAC.LOGGER.info("Performing Client-Side initialization...");
-		registerCommands.RegisterCommands();
+  @Override
+  public void onInitializeClient(ModContainer mod) {
+    AvAC.LOGGER.info("Performing Client-Side initialization...");
+    registerCommands.RegisterCommands();
 
-		if(!avacConfig.enableAvAC){
-			AvAC.LOGGER.warn("AvAC is disabled, You won't be able to join AvAC-enabled servers.");
-		}
+    if (!avacConfig.enableAvAC) {
+      AvAC.LOGGER.warn("AvAC is disabled, You won't be able to join AvAC-enabled servers.");
+    }
 
-		ClientPlayConnectionEvents.JOIN.register(onPlayerJoinEvent);
-
-	}
+    ClientPlayConnectionEvents.JOIN.register(onPlayerJoinEvent);
+  }
 }

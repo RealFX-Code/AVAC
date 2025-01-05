@@ -12,17 +12,13 @@ import rocks.realfx.avac.avacState;
 @Mixin(value = ClientBrandRetriever.class)
 public class GetClientModNameMixin {
 
-	@Inject(
-		method="getClientModName",
-		at = @At("HEAD"),
-		cancellable = true,
-		remap = false)
-	private static void getClientModName(@NotNull CallbackInfoReturnable<String> cir){
-		if(avacState.clientSuccessfulValidation){
-			cir.setReturnValue(avacConfig.clientBrandWhenSuccess);
-		} else {
-			cir.setReturnValue("Vanilla");
-		}
-		cir.cancel();
-	}
+  @Inject(method = "getClientModName", at = @At("HEAD"), cancellable = true, remap = false)
+  private static void getClientModName(@NotNull CallbackInfoReturnable<String> cir) {
+    if (avacState.clientSuccessfulValidation) {
+      cir.setReturnValue(avacConfig.clientBrandWhenSuccess);
+    } else {
+      cir.setReturnValue("Vanilla");
+    }
+    cir.cancel();
+  }
 }

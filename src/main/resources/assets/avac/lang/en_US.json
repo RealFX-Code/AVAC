@@ -4,7 +4,6 @@
   "avac.midnightconfig.enableAvAC": "Enable AvAC?",
   "avac.midnightconfig.advancedComment": "CAUTION: ADVANCED SETTINGS!",
   "avac.midnightconfig.clientBrandWhenSuccess": "Client brand on successful client validation:",
-
   "avac.midnightconfig.category.server": "Server settings",
   "avac.midnightconfig.allowedMods": "Allowed Mods list"
 }

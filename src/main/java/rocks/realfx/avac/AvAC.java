@@ -11,20 +11,19 @@ import static rocks.realfx.avac.modInfo.MOD_DESCRIPTOR;
 import static rocks.realfx.avac.modInfo.MOD_ID;
 
 public class AvAC implements ModInitializer {
-	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
+  public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
-	//
-	// This class is for both Client- and Server-Sided initialization.
-	//
+  //
+  // This class is for both Client- and Server-Sided initialization.
+  //
 
-	@Override
-	public void onInitialize(@NotNull ModContainer mod) {
+  @Override
+  public void onInitialize(@NotNull ModContainer mod) {
 
-		LOGGER.info(" Loading {}...", MOD_DESCRIPTOR);
+    LOGGER.info(" Loading {}...", MOD_DESCRIPTOR);
 
-		LOGGER.info(" Initializing Configuration...");
+    LOGGER.info(" Initializing Configuration...");
 
-		MidnightConfig.init(MOD_ID, avacConfig.class);
-
-	}
+    MidnightConfig.init(MOD_ID, avacConfig.class);
+  }
 }

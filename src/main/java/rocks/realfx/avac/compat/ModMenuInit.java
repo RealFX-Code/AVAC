@@ -6,9 +6,8 @@ import eu.midnightdust.lib.config.MidnightConfig;
 import rocks.realfx.avac.modInfo;
 
 public class ModMenuInit implements ModMenuApi {
-	@Override
-	public ConfigScreenFactory<?> getModConfigScreenFactory() {
-		return parent -> MidnightConfig.getScreen(parent, modInfo.MOD_ID);
-	}
-
+  @Override
+  public ConfigScreenFactory<?> getModConfigScreenFactory() {
+    return parent -> MidnightConfig.getScreen(parent, modInfo.MOD_ID);
+  }
 }

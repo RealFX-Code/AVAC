@@ -17,54 +17,50 @@ import java.util.Set;
 
 public class gatherClientInformation {
 
-	// 30-03-2024
-	// Stolen from: https://www.baeldung.com/java-list-directory-files#dir-stream
+  // 30-03-2024
+  // Stolen from: https://www.baeldung.com/java-list-directory-files#dir-stream
 
-	private Set<String> listFiles(String dir) throws IOException {
-		Set<String> fileSet = new HashSet<>();
-		try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(dir))) {
-			for (Path path : stream) {
-				if (!Files.isDirectory(path)) {
-					fileSet.add(path.getFileName()
-						.toString());
-				}
-			}
-		}
-		return fileSet;
-	}
+  private Set<String> listFiles(String dir) throws IOException {
+    Set<String> fileSet = new HashSet<>();
+    try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get(dir))) {
+      for (Path path : stream) {
+        if (!Files.isDirectory(path)) {
+          fileSet.add(path.getFileName().toString());
+        }
+      }
+    }
+    return fileSet;
+  }
 
-	public avacPayload getClientInfo(){
-		List<String> modIDs = new ArrayList<>();
+  public avacPayload getClientInfo() {
+    List<String> modIDs = new ArrayList<>();
 
-		for (ModContainer modContainer : QuiltLoader.getAllMods()) {
-			String modID = modContainer.metadata().id();
+    for (ModContainer modContainer : QuiltLoader.getAllMods()) {
+      String modID = modContainer.metadata().id();
 
-			// Stop cluttering from mod list
-			boolean isNestedLib = modContainer.metadata().group().startsWith("org.quiltmc.qsl") ||
-				modContainer.metadata().group().startsWith("org.quiltmc.quilted-fabric-api");
+      // Stop cluttering from mod list
+      boolean isNestedLib =
+          modContainer.metadata().group().startsWith("org.quiltmc.qsl")
+              || modContainer.metadata().group().startsWith("org.quiltmc.quilted-fabric-api");
 
-			if(!isNestedLib)
-			{
-				modIDs.add(modID);
-			}
+      if (!isNestedLib) {
+        modIDs.add(modID);
+      }
+    }
 
-		}
+    List<String> rpacks = new ArrayList<>();
 
-		List<String> rpacks = new ArrayList<>();
+    try {
+      Set<String> ResourcePacks =
+          listFiles(String.valueOf(MinecraftClient.getInstance().getResourcePackDir()));
+      for (String pack : ResourcePacks) {
+        rpacks.add(pack.replaceAll(" ", "_"));
+      }
+    } catch (IOException e) {
+      AvAC.LOGGER.error("Could not validate resource packs!", e);
+      rpacks.add(String.valueOf(e));
+    }
 
-		try {
-			Set<String> ResourcePacks = listFiles(String.valueOf(MinecraftClient.getInstance().getResourcePackDir()));
-			for( String pack : ResourcePacks) {
-				rpacks.add(pack.replaceAll(" ","_"));
-			}
-		} catch (IOException e) {
-			AvAC.LOGGER.error("Could not validate resource packs!", e);
-			rpacks.add(String.valueOf(e));
-		}
-
-		return new avacPayload(
-			modIDs,
-			rpacks
-		);
-	}
+    return new avacPayload(modIDs, rpacks);
+  }
 }

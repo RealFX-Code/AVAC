@@ -8,8 +8,11 @@ import org.quiltmc.qsl.networking.api.ServerPlayConnectionEvents;
 
 public class onServerPlayerJoinEvent implements ServerPlayConnectionEvents.Join {
 
-	@Override
-	public void onPlayReady(ServerPlayNetworkHandler handler, PacketSender<CustomPayload> sender, MinecraftServer server) {
-		//AvAC.LOGGER.info("I have no clue who, but someone is ready!");
-	}
+  @Override
+  public void onPlayReady(
+      ServerPlayNetworkHandler handler,
+      PacketSender<CustomPayload> sender,
+      MinecraftServer server) {
+    // AvAC.LOGGER.info("I have no clue who, but someone is ready!");
+  }
 }
