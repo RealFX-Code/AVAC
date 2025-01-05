@@ -16,6 +16,7 @@ import org.quiltmc.qsl.networking.api.ServerPlayNetworking;
 
 import io.netty.buffer.Unpooled;
 import rocks.realfx.avac.AvAC;
+import rocks.realfx.avac.common.avacPayload;
 import rocks.realfx.avac.common.NetworkingConstants;
 import static rocks.realfx.avac.common.NetworkingConstants.HANDSHAKE_PACKET;
 
@@ -25,8 +26,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-
-import rocks.realfx.avac.common.avacPayload;
 
 public class AvACServer implements DedicatedServerModInitializer {
 

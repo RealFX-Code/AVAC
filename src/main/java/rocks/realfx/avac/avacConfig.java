@@ -7,6 +7,8 @@ import eu.midnightdust.lib.config.MidnightConfig;
 
 public class avacConfig extends MidnightConfig {
 
+	/* CLIENT CONFIG */
+
 	@Entry(category = "client")
 	public static boolean enableAvAC = true;
 
@@ -18,8 +20,6 @@ public class avacConfig extends MidnightConfig {
 
 	/* SERVER CONFIG */
 
-	// Ignore this really fucked up declaration please.
-	// TODO: improve this shit fuck list thing
 	@Entry(category = "server")
 	public static List<String> allowedMods = Lists.newArrayList(
             "midnightlib",

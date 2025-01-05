@@ -5,7 +5,6 @@ import org.quiltmc.loader.api.ModContainer;
 import org.quiltmc.loader.api.QuiltLoader;
 import rocks.realfx.avac.AvAC;
 import rocks.realfx.avac.common.avacPayload;
-
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
