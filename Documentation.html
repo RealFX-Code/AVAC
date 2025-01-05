@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>AvAC Documentation</title>
+        <style>
+            html,body {
+                background: #0c0c0c;
+                color: #f7f7f7;
+            }
+
+            div {
+                padding: 16px;
+                width: fit-content;
+            }
+
+            section {
+                padding: 8px;
+            }
+
+            span.mono {
+                padding: 2px;
+                background-color: #00000077;
+                font-family: monospace;
+            }
+
+            a {
+                color: unset;
+                text-decoration: none;
+            }
+
+            a.link {
+                color: #aaaaff;
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <h1>AvAC Documentation</h1>
+            <hr>
+            <a class="link" href="https://github.com/RealFX-Code/AVAC">AvAC's Github repository</a>
+        </div>
+        <div class="content">
+            <h2 id="usage-client">
+                <a href="#usage-client">
+                    Using AvAC on a client
+                </a>
+            </h2>
+            <hr>
+            <section>
+                Clients have it easy. Simply get the latest jar (provided by your server administrator) and install it in your QuiltMC client.
+                All important validation gets done on the server, and the client won't have to worry.
+            </section>
+        </div>
+        <div class="content">
+            <h2 id="usage">
+                <a href="#usage">
+                    Using AvAC on a server
+                </a>
+            </h2>
+            <hr>
+            <section>
+                Server hosts have to do a small bit of extra configuration.
+                After the first run a config file should be initialized. (Please see MidnightLib's documentation for finding the config file.)
+                In there you can change the allowed mods.<br>
+                NOTE: Resource pack checking isn't configurable right now.
+            </section>
+        </div>
+        <div class="content">
+            <h2 id="logic">
+                <a href="#logic">
+                    Going through the logic
+                </a>
+            </h2>
+            <hr>
+            <section>
+                There are two channels registered for this mod:
+                <ol>
+                    <li>
+                        HIGHLIGHT_PACKET_ID
+                    </li>
+                    <li>
+                        HANDSHAKE_PACKET
+                    </li>
+                </ol>
+            </section>
+            <section>
+                The first channel (<span class="mono">HIGHLIGHT_PACKET_ID</span>) is used for the main communication between the Server and Client.
+                The only communication that happens on it, is the client sending the server a list of all installed mods, and all installed resource packs.
+                It's the servers job to then validate them both against the basic checks implemented, and against the allowed-mods list.
+            </section>
+            <section>
+                The second channel (<span class="mono">HANDSHAKE_PACKET</span>) is used to establish with the client that AvAC is both enabled and installed.
+                When a player joins, the server sends a "please respond" packet, and starts a 5-second timer.
+                If the client has responded successfully within those 5 seconds, the player is let in.
+                If not, The client gets disconnected.
+            </section>
+        </div>
+        <div class="content">
+            <h2 id="checks">
+                <a href="#checks">
+                    The checks that are performed
+                </a>
+            </h2>
+            <hr>
+            <section>
+                Resource packs go through a simple check to look for "xray" in their name.
+            </section>
+            <section>
+                Mods go through a check against a list of "allowed mods", If any mods are detected that aren't on that list, it gets logged to server admins.
+            </section>
+            <section>
+                Both resource packs and installed mods are logged for each player that joins so server administrators can check what mods and resource packs a player is using.
+            </section>
+        </div>
+    </body>
+</html>
